@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mechanical Design & Automation Portfolio</title>
-    <!-- Google Fonts for clean typography -->
+    <title>Fakhri Maulana | Mechanical Design Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS VARIABLES: Easy color and design token management */
         :root {
             --bg-color: #0b0f19;
             --card-bg: #131b2e;
@@ -18,43 +16,77 @@
             --accent-hover: #0ea5e9;
         }
 
-        /* RESET & BASE STYLES */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Inter', sans-serif, -apple-system, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
-            padding: 40px 20px;
+            padding-top: 70px; /* Space for fixed navbar */
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* MAIN LAYOUT WRAPPER */
+        /* NAVIGATION BAR */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(11, 15, 25, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: center;
+            padding: 15px 20px;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* WRAPPER */
         .wrapper {
             width: 100%;
             max-width: 800px;
+            padding: 0 20px;
         }
 
-        /* SECTION STYLING */
         section {
-            margin-bottom: 50px;
+            padding: 60px 0;
+            border-bottom: 1px solid var(--card-border);
         }
 
-        /* HEADER / HERO SECTION */
-        header {
-            margin-bottom: 40px;
+        section:last-of-type {
+            border-bottom: none;
         }
 
+        /* TYPOGRAPHY */
         h1 {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--text-main);
             margin-bottom: 10px;
         }
 
@@ -68,27 +100,23 @@
         .bio {
             color: var(--text-muted);
             font-size: 1rem;
-            max-width: 600px;
+            max-width: 650px;
         }
 
-        /* HEADINGS FOR SUB-SECTIONS */
         h2 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--card-border);
-            padding-bottom: 8px;
-            display: inline-block;
+            margin-bottom: 25px;
+            color: var(--text-main);
         }
 
-        /* SKILLS BADGES CONTAINER */
+        /* SKILLS */
         .skills-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
 
-        /* INDIVIDUAL SKILL TAG */
         .skill-tag {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -99,14 +127,13 @@
             font-weight: 500;
         }
 
-        /* PROJECTS CARD CONTAINER */
+        /* PROJECTS */
         .projects-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
         }
 
-        /* PROJECT CARD */
         .project-card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -124,7 +151,6 @@
             font-size: 1.15rem;
             font-weight: 600;
             margin-bottom: 8px;
-            color: var(--text-main);
         }
 
         .project-desc {
@@ -133,7 +159,7 @@
             margin-bottom: 15px;
         }
 
-        /* BUTTONS & LINKS */
+        /* BUTTONS */
         .btn {
             display: inline-block;
             background: var(--accent);
@@ -143,6 +169,8 @@
             font-weight: 600;
             text-decoration: none;
             font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
             transition: background 0.2s ease;
         }
 
@@ -150,10 +178,79 @@
             background: var(--accent-hover);
         }
 
-        /* CONTACT SECTION LINKS */
+        /* CREDENTIALS LIST */
+        .credential-item {
+            margin-bottom: 20px;
+        }
+        .credential-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .credential-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* MODAL POP-UP WINDOW */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            max-width: 550px;
+            width: 100%;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .close-btn:hover {
+            color: var(--text-main);
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .modal-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* CONTACT */
         .contact-links {
             display: flex;
-            gap: 15px;
+            gap: 20px;
         }
 
         .contact-link {
@@ -166,80 +263,145 @@
             text-decoration: underline;
         }
 
-        /* FOOTER */
         footer {
             text-align: center;
             color: var(--text-muted);
             font-size: 0.85rem;
-            margin-top: 60px;
-            border-top: 1px solid var(--card-border);
-            padding-top: 20px;
+            padding: 40px 0;
         }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#credentials">Credentials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
     <div class="wrapper">
 
-        <!-- HEADER / HERO SECTION -->
-        <header>
+        <!-- 1. HOME SECTION -->
+        <section id="home">
             <h1>Fakhri Maulana</h1>
             <div class="subtitle">Mechanical Design & Automation Engineer</div>
-            <p class="bio">Specializing in Special Purpose Machines (SPM), industrial automation, pneumatic systems, and precision 3D CAD modeling. Focused on building robust mechanical solutions from first-principles.</p>
-        </header>
+            <p class="bio">Building high-performance Special Purpose Machines, precision automation equipment, and robust mechanical systems from first-principles.</p>
+        </section>
 
-        <!-- SKILLS SECTION -->
-        <section>
-            <h2>Core Expertise</h2>
+        <!-- 2. ABOUT SECTION -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p class="bio" style="margin-bottom: 20px;">I am a mechanical design engineer specializing in industrial automation, pneumatic systems, electric actuators, and computer vision integration. I enjoy taking mechanical systems from conceptual 3D CAD modeling through Finite Element Analysis (FEA) down to hands-on assembly and commissioning.</p>
             <div class="skills-grid">
-                <div class="skill-tag">SolidWorks / CAD</div>
+                <div class="skill-tag">SolidWorks</div>
                 <div class="skill-tag">Industrial Automation</div>
                 <div class="skill-tag">Special Purpose Machines</div>
-                <div class="skill-tag">Pneumatic Systems</div>
-                <div class="skill-tag">Finite Element Analysis (FEA)</div>
+                <div class="skill-tag">Pneumatics</div>
+                <div class="skill-tag">FEA Simulation</div>
                 <div class="skill-tag">Python & OpenCV</div>
             </div>
         </section>
 
-        <!-- PROJECTS SECTION -->
-        <section>
-            <h2>Featured Projects</h2>
+        <!-- 3. PROJECTS SECTION -->
+        <section id="projects">
+            <h2>Projects</h2>
             <div class="projects-grid">
                 
                 <!-- Project 1 -->
                 <div class="project-card">
                     <div class="project-title">Automated Inspection & Labeling SPM</div>
-                    <div class="project-desc">Designed custom automated equipment integrated with multi-camera computer vision inspection systems for high-speed manufacturing production lines.</div>
-                    <a href="#" class="btn">View Project Details</a>
+                    <div class="project-desc">Custom automated equipment integrated with multi-camera computer vision inspection systems for high-speed manufacturing lines.</div>
+                    <button class="btn" onclick="openModal('modal1')">View Details & 3D Model</button>
                 </div>
 
                 <!-- Project 2 -->
                 <div class="project-card">
                     <div class="project-title">3-RRS Parallel Robot Platform</div>
-                    <div class="project-desc">Developed a ball-balancing mechanical platform driven by positional servos, controlled via a Raspberry Pi and real-time computer vision tracking.</div>
-                    <a href="#" class="btn">View Project Details</a>
+                    <div class="project-desc">Ball-balancing mechanical platform driven by positional servos, controlled via Raspberry Pi and real-time vision tracking.</div>
+                    <button class="btn" onclick="openModal('modal2')">View Details & 3D Model</button>
                 </div>
 
             </div>
         </section>
 
-        <!-- CONTACT SECTION -->
-        <section>
-            <h2>Get in Touch</h2>
-            <p class="bio" style="margin-bottom: 15px;">Interested in collaborating or discussing engineering design work? Feel free to reach out.</p>
-            <div class="contact-links">
-                <a href="mailto:your_email@example.com" class="contact-link">Email Me</a>
-                <a href="https://linkedin.com" target="_blank" class="contact-link">LinkedIn</a>
-                <a href="https://github.com" target="_blank" class="contact-link">GitHub</a>
+        <!-- 4. CREDENTIALS SECTION -->
+        <section id="credentials">
+            <h2>Credentials & Experience</h2>
+            <div class="credential-item">
+                <h3>Design & Vision Engineer — PT. Robotec Ergo Solution</h3>
+                <p>Developed custom SPM equipment, trained vision AI models, and implemented automated multi-camera inspection systems.</p>
+            </div>
+            <div class="credential-item" style="margin-top: 25px;">
+                <h3>Bachelor of Engineering (B.E.) in Mechanical Engineering</h3>
+                <p>Institut Teknologi Bandung (ITB) — Focused on mechanical design, dynamics, and automation.</p>
             </div>
         </section>
 
-        <!-- FOOTER -->
+        <!-- 5. CONTACT SECTION -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <p class="bio" style="margin-bottom: 20px;">Interested in discussing mechanical engineering design work or automation projects? Get in touch below:</p>
+            <div class="contact-links">
+                <a href="mailto:your_email@example.com" class="contact-link">Email Me</a>
+                <a href="https://linkedin.com" target="_blank" class="contact-link">LinkedIn</a>
+                <a href="https://github.com" target="_blank" class="link">GitHub</a>
+            </div>
+        </section>
+
         <footer>
-            <p>&copy; 2026 Fakhri Maulana. Built with clean code & hosted via Vercel / GitHub.</p>
+            <p>&copy; 2026 Fakhri Maulana. Hosted via GitHub & Vercel.</p>
         </footer>
 
     </div>
+
+    <!-- MODAL POPUP 1 -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal1')">&times;</button>
+            <div class="modal-title">Automated Inspection & Labeling SPM</div>
+            <div class="modal-text">
+                <strong>Overview:</strong> A high-throughput industrial machine designed to inspect component defects and apply labels dynamically on a moving conveyor.<br><br>
+                <strong>Engineering Scope:</strong> Designed pneumatic clamping mechanisms, structural framing using extruded aluminum profiles, and calculated motor torque requirements. Integrated OpenCV cameras for real-time quality pass/fail decisions.
+            </div>
+            <!-- Change href to your actual Sketchfab, Onshape, or CAD viewer link -->
+            <a href="https://sketchfab.com" target="_blank" class="btn">View 3D Model in Browser</a>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP 2 -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal2')">&times;</button>
+            <div class="modal-title">3-RRS Parallel Robot Platform</div>
+            <div class="modal-text">
+                <strong>Overview:</strong> A 3-DOF parallel kinematic mechanism engineered to balance a rolling ball in real-time across a tilting plate.<br><br>
+                <strong>Engineering Scope:</strong> Custom designed linkages and ball joints in SolidWorks, performed kinematic analysis, and interfaced MG995 servos with a PCA9685 driver board and Raspberry Pi.
+            </div>
+            <!-- Change href to your actual 3D model link -->
+            <a href="https://github.com" target="_blank" class="btn">View 3D Model / CAD Files</a>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FOR POPUP MODALS -->
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        // Close modal if user clicks outside the box
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
 
 </body>
 </html>
